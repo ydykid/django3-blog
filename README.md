@@ -26,3 +26,8 @@ requirements
     django-filter
     django-guardian
 
+
+corsheaders
+
+    apps corsheaders
+    middlware corsheaders.middleware.CorsMiddleware
