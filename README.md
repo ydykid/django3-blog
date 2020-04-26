@@ -15,3 +15,14 @@ requirements:
     xlwt
     xlsxwriter
 
+djangorestframework
+
+requirements
+    
+    djangorestframework-jwt
+    coreapi
+    Markdown
+    Pygments
+    django-filter
+    django-guardian
+

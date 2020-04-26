@@ -54,6 +54,9 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'xadmin',
+    #
+    'rest_framework',
+    'django_filters',
 ]
 
 LOCAL_APPS = [

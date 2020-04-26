@@ -17,6 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from rest_framework.documentation import include_docs_urls
 
 import xadmin
 
@@ -24,6 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('xadmin/', xadmin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    #
+    path('docs/', include_docs_urls(title='接口文档')),
+    path('api/article', include('article.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
