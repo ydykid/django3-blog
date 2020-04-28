@@ -27,7 +27,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     #
     path('docs/', include_docs_urls(title='接口文档')),
-    path('api/article', include('article.urls')),
+    path('api/article/', include('article.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
