@@ -14,13 +14,29 @@ import os
 import sys
 import datetime
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.join(BASE_DIR, '../')
+import environ
 
-sys.path.insert(0, BASE_DIR)
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps_extra'))
+ROOT_DIR = (environ.Path(__file__) - 3)
+APPS_DIR = ROOT_DIR.path('django3_test')
+
+env = environ.Env()
+# READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
+if READ_DOT_ENV_FILE:
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(ROOT_DIR.path(".env")))
+
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.join(BASE_DIR, '../')
+
+# sys.path.insert(0, BASE_DIR)
+# sys.path.insert(0, ROOT_DIR)
+# sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+# sys.path.insert(0, ROOT_DIR.path('apps'))
+# sys.path.insert(0, os.path.join(BASE_DIR, 'apps_extra'))
+# sys.path.insert(0, ROOT_DIR.path('apps_extra'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -119,7 +135,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django3_test.wsgi.application'
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -137,7 +152,6 @@ WSGI_APPLICATION = 'django3_test.wsgi.application'
 #         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 #     },
 # ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -162,7 +176,8 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = str(ROOT_DIR.path("staticfiles"))
 STATICFILES_DIRS = ['static']
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -170,7 +185,8 @@ STATICFILES_FINDERS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = env('DJANGO_MEDIA_ROOT', default=str(ROOT_DIR("media")))
 
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 
@@ -215,7 +231,6 @@ REST_FRAMEWORK = {
     )
 }
 
-
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -246,8 +261,8 @@ LOGGING = {
         "error": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join('logs', 'error-rotating.log'),
-            # "filename": os.path.join(env.str('LOGGING_PATH', default=os.path.join(ROOT_DIR)), 'logs',
+            # "filename": os.path.join('logs', 'error-rotating.log'),
+            "filename": os.path.join(env.path('LOGGING_PATH', default=ROOT_DIR.path('logs')), 'error-rotating.log'),
             # 'error-rotating.log'),
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 5,
@@ -256,8 +271,8 @@ LOGGING = {
         "info": {
             "level": "INFO",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join('logs', 'error-rotating.log'),
-            # "filename": os.path.join(env.str('LOGGING_PATH', default=os.path.join(ROOT_DIR)), 'logs',
+            # "filename": os.path.join('logs', 'info-rotating.log'),
+            "filename": os.path.join(env.path('LOGGING_PATH', default=ROOT_DIR.path('logs')), 'info-rotating.log'),
             # 'info-rotating.log'),
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 5,
@@ -267,3 +282,12 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console", "error", "info"]},
 }
 
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        # 'height': 300,
+        # 'width': 300,
+    },
+}

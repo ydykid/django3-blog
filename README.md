@@ -31,3 +31,5 @@ corsheaders
 
     apps corsheaders
     middlware corsheaders.middleware.CorsMiddleware
+
+django-environ
