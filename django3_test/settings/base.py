@@ -78,6 +78,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'my_base',
     'user',
     'article',
 ]
