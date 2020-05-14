@@ -19,6 +19,9 @@ import environ
 ROOT_DIR = (environ.Path(__file__) - 3)
 APPS_DIR = ROOT_DIR.path('django3_test')
 
+# print(ROOT_DIR)
+# print(APPS_DIR)
+
 env = environ.Env()
 # READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
@@ -33,6 +36,7 @@ if READ_DOT_ENV_FILE:
 
 # sys.path.insert(0, BASE_DIR)
 # sys.path.insert(0, ROOT_DIR)
+# sys.path.insert(0, APPS_DIR)
 # sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # sys.path.insert(0, ROOT_DIR.path('apps'))
 # sys.path.insert(0, os.path.join(BASE_DIR, 'apps_extra'))
@@ -69,6 +73,7 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
+    # 'xadmin.apps.XadimConfig',
     'xadmin',
     #
     'rest_framework',

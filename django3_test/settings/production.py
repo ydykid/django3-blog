@@ -8,6 +8,8 @@
 
 from .base import *
 
+print('settings.production')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
