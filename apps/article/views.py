@@ -5,7 +5,11 @@ from rest_framework import (
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .serializers import ArticleSerializer, ArticleIdsSerializer
+from .serializers import (
+    ArticleSerializer,
+    ArticleDetailSerializer,
+    ArticleIdsSerializer,
+)
 
 from .models import Article
 
@@ -24,6 +28,10 @@ class ArticleViewSet(viewsets.GenericViewSet,
     def get_serializer_class(self):
         if self.action == 'ids':
             return ArticleIdsSerializer
+        elif self.action == 'list':
+            return ArticleDetailSerializer
+        elif self.action == 'retrieve':
+            return ArticleDetailSerializer
         return ArticleSerializer
 
     @action(methods=['post'], detail=True)
