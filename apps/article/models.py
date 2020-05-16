@@ -65,9 +65,9 @@ class Article(m.TimeStampedModel):
                                   related_name='articles',
                                   )
 
-    content = RichTextField(verbose_name='内容',
-                            help_text='内容',
-                            max_length=1500)
+    content_ck = RichTextField(verbose_name='内容',
+                               help_text='内容',
+                               max_length=1500)
 
     comment_m2m = models.ManyToManyField(User,
                                          verbose_name='评论(m2m)',
