@@ -48,6 +48,7 @@ class Tag(m.TimeStampedModel):
 
 class Article(m.TimeStampedModel):
     title = models.CharField(verbose_name='标题',
+                             help_text='标题',
                              max_length=255)
 
     category = models.ForeignKey(Category,
@@ -65,6 +66,7 @@ class Article(m.TimeStampedModel):
                                   )
 
     content = RichTextField(verbose_name='内容',
+                            help_text='内容',
                             max_length=1500)
 
     comment_m2m = models.ManyToManyField(User,
