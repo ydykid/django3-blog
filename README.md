@@ -33,3 +33,6 @@ corsheaders
     middlware corsheaders.middleware.CorsMiddleware
 
 django-environ
+    
+    django-environ
+   
