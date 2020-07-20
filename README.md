@@ -35,4 +35,7 @@ corsheaders
 django-environ
     
     django-environ
-   
+ 
+django-asgi
+     daphne
+     django3_test.asgi:application
